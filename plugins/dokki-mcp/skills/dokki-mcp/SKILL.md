@@ -1,6 +1,6 @@
 ---
 name: dokki-mcp
-description: Use when connecting Codex to a Dokki workspace through the dokki-mcp plugin, including configuring endpoint URL, connector token, and selecting the documents or memory MCP flavor.
+description: Use when connecting Codex to a Dokki workspace through the dokki-mcp plugin, including configuring endpoint URL, connector token, and selecting the documents, publish, or memory MCP flavor.
 ---
 
 # Dokki MCP
@@ -27,6 +27,7 @@ Defaults:
 Supported flavors:
 
 - `documents`: `/api/mcp`
+- `publish`: `/api/publish-mcp`
 - `memory`: `/api/mem-mcp`
 
 ## Local Dokki
@@ -42,4 +43,4 @@ Then configure the plugin with a Dokki connector token or personal API key.
 
 ## Notes
 
-Workspace-scoped connector tokens are preferred because Dokki locks tool access to that workspace. The documents flavor exposes workspace resource, document, table, artifact, search, publishing, and sharing tools. The memory flavor exposes only `memory_*` tools.
+Workspace-scoped connector tokens are preferred because Dokki locks tool access to that workspace. The documents flavor exposes workspace resource, document, table, artifact, search, tagging, folder, and sharing tools. The publish flavor exposes site publishing and custom-domain tools. The memory flavor exposes only `memory_*` tools.
