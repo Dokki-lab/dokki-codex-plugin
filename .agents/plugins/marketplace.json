@@ -1,7 +1,7 @@
 {
-  "name": "dokki-local",
+  "name": "dokki-sdk",
   "interface": {
-    "displayName": "Dokki Local"
+    "displayName": "Dokki SDK"
   },
   "plugins": [
     {

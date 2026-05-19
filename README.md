@@ -45,3 +45,29 @@ npm run check
 ```
 
 The Codex marketplace entry lives at `.agents/plugins/marketplace.json`; the plugin itself lives under `plugins/dokki-mcp`.
+
+## Codex Marketplace Import
+
+This repository is structured as a repo-local Codex marketplace:
+
+```text
+.agents/plugins/marketplace.json
+plugins/dokki-mcp/.codex-plugin/plugin.json
+```
+
+Marketplace entry:
+
+```json
+{
+  "name": "dokki-mcp",
+  "source": {
+    "source": "local",
+    "path": "./plugins/dokki-mcp"
+  },
+  "policy": {
+    "installation": "AVAILABLE",
+    "authentication": "ON_USE"
+  },
+  "category": "Productivity"
+}
+```
