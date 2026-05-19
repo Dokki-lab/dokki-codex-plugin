@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "dokki": {
+      "command": "node",
+      "args": ["./scripts/dokki-mcp-bridge.mjs"],
+      "cwd": "."
+    }
+  }
+}

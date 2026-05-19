@@ -1,0 +1,42 @@
+{
+  "name": "dokki-mcp",
+  "version": "0.1.0",
+  "description": "Expose Dokki's built-in MCP servers to Codex through a local stdio bridge.",
+  "author": {
+    "name": "Dokki",
+    "email": "support@dokki.ai",
+    "url": "https://dokki.ai"
+  },
+  "homepage": "https://dokki.ai",
+  "repository": "https://github.com/Dokki/web",
+  "license": "MIT",
+  "keywords": [
+    "dokki",
+    "mcp",
+    "documents",
+    "memory"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Dokki MCP",
+    "shortDescription": "Connect Codex to Dokki workspace tools.",
+    "longDescription": "A local stdio bridge that lets Codex use Dokki's Streamable HTTP MCP endpoints for workspace documents, tables, artifacts, publishing, search, and memory.",
+    "developerName": "Dokki",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://dokki.ai",
+    "privacyPolicyURL": "https://dokki.ai/privacy",
+    "termsOfServiceURL": "https://dokki.ai/terms",
+    "defaultPrompt": [
+      "List my Dokki workspace resources.",
+      "Search Dokki for notes about this topic.",
+      "Add this fact to Dokki memory."
+    ],
+    "brandColor": "#111827"
+  }
+}

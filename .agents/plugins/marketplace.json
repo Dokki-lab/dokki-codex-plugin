@@ -1,0 +1,20 @@
+{
+  "name": "dokki-local",
+  "interface": {
+    "displayName": "Dokki Local"
+  },
+  "plugins": [
+    {
+      "name": "dokki-mcp",
+      "source": {
+        "source": "local",
+        "path": "./plugins/dokki-mcp"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
