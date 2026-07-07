@@ -1,6 +1,6 @@
 ---
 name: dokki-mcp
-description: Use when connecting Codex to Dokki through the dokki-mcp plugin, including OAuth workspace selection and the documents, publish, and memory MCP servers.
+description: Use when connecting Codex to Dokki through the dokki-mcp plugin, including OAuth workspace selection and the documents, tables, artifacts, file upload/download, publish, and memory MCP servers.
 ---
 
 # Dokki MCP
@@ -26,6 +26,40 @@ The plugin declares three hosted servers:
 - `dokki-memory`: Mem0-style durable workspace memory tools.
 
 All servers use `https://dokki.one` and Dokki OAuth discovery.
+
+## Tool Families
+
+The main `dokki` MCP server is not document-only. It includes:
+
+- Workspace discovery and organization: `list_workspaces`, `list_resources`,
+  `create_workspace`, `create_folder`, `move_resource`, `update_resource`,
+  `delete_resource`, `tag_resource`, `untag_resource`, `share_resource`.
+- Search and inspection: `search_workspace`, `grep_workspace`, `related_entities`,
+  `preview_resource`.
+- Documents: `create_document`, `doc_read`, `doc_insert`, `doc_replace`,
+  `doc_delete`, `doc_rewrite`.
+- Tables: `create_table`, `table_read`, `table_add_rows`, `table_delete_rows`,
+  `table_add_columns`, `table_delete_columns`, `table_update_columns`,
+  `table_update_cells`.
+- Artifacts: `create_artifact`, `artifact_read`, `artifact_update`,
+  `artifact_patch`.
+- Files: `upload_file` creates file resources or inline document image assets;
+  `download_file` returns a short-lived signed download URL by default, or inline
+  base64 bytes for small files. Existing file resources are discoverable through
+  `list_resources`, searchable through `search_workspace` / `grep_workspace`,
+  and manageable through resource tools. There is currently no dedicated
+  `file_update` tool.
+- Workspace channel: `list_channel_members`, `read_channel`,
+  `send_channel_message`.
+
+Use the narrower skills when the task is clearly about one surface:
+
+- `dokki-workspace` for browsing, resource management, tags, sharing, and search.
+- `dokki-table` for structured data, rows, columns, and cells.
+- `dokki-artifact` for JSX/HTML artifacts, charts, diagrams, and widgets.
+- `dokki-file` for uploading files, downloading files, or creating inline images.
+- `dokki-publish` for published sites and custom domains.
+- `dokki-memory` for durable workspace memory.
 
 ## Local Dokki
 
