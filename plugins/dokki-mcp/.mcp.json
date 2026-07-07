@@ -3,14 +3,6 @@
     "dokki": {
       "type": "http",
       "url": "https://dokki.one/api/mcp"
-    },
-    "dokki-publish": {
-      "type": "http",
-      "url": "https://dokki.one/api/publish-mcp"
-    },
-    "dokki-memory": {
-      "type": "http",
-      "url": "https://dokki.one/api/mem-mcp"
     }
   }
 }

@@ -49,4 +49,3 @@ Batch related cell changes into one `table_update_cells` call.
 
 - Create a visualization from table data with `dokki-artifact`.
 - Share or move the table with `dokki-workspace`.
-- Publish the table with `dokki-publish`.
