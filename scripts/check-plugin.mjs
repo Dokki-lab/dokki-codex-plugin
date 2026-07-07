@@ -16,6 +16,10 @@ function assert(condition, message) {
   }
 }
 
+function assertFile(relativePath) {
+  assert(fs.existsSync(path.join(repoRoot, relativePath)), `${relativePath} is missing`);
+}
+
 const plugin = readJson("plugins/dokki-mcp/.codex-plugin/plugin.json");
 const mcp = readJson("plugins/dokki-mcp/.mcp.json");
 const marketplace = readJson(".agents/plugins/marketplace.json");
@@ -39,6 +43,45 @@ assert(
   plugin.interface?.termsOfServiceURL === "https://dokki.one/terms",
   "plugin termsOfServiceURL must use dokki.one/terms"
 );
+assert(
+  plugin.interface?.composerIcon === "./assets/icon.png",
+  "plugin composerIcon must point at ./assets/icon.png"
+);
+assert(plugin.interface?.logo === "./assets/logo.png", "plugin logo must point at ./assets/logo.png");
+assert(
+  plugin.interface?.logoDark === "./assets/logo-dark.png",
+  "plugin logoDark must point at ./assets/logo-dark.png"
+);
+assert(
+  (plugin.keywords ?? []).includes("tables") &&
+    (plugin.keywords ?? []).includes("artifacts") &&
+    (plugin.keywords ?? []).includes("files"),
+  "plugin keywords must include tables, artifacts, and files"
+);
+assert(
+  Array.isArray(plugin.interface?.defaultPrompt) &&
+    plugin.interface.defaultPrompt.length <= 3,
+  "defaultPrompt must contain at most 3 entries"
+);
+
+for (const asset of [
+  "plugins/dokki-mcp/assets/icon.png",
+  "plugins/dokki-mcp/assets/logo.png",
+  "plugins/dokki-mcp/assets/logo-dark.png",
+]) {
+  assertFile(asset);
+}
+
+for (const skill of [
+  "dokki-workspace",
+  "dokki-table",
+  "dokki-artifact",
+  "dokki-file",
+  "dokki-publish",
+  "dokki-memory",
+]) {
+  assertFile(`plugins/dokki-mcp/skills/${skill}/SKILL.md`);
+}
 
 const servers = mcp.mcpServers ?? {};
 for (const name of ["dokki", "dokki-publish", "dokki-memory"]) {

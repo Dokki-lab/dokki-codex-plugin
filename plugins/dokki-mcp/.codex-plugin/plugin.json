@@ -1,6 +1,6 @@
 {
   "name": "dokki-mcp",
-  "version": "0.2.0+codex.20260707142127",
+  "version": "0.2.0+codex.20260707144802",
   "description": "Expose Dokki's hosted MCP servers to Codex with OAuth.",
   "author": {
     "name": "Dokki",
@@ -14,6 +14,9 @@
     "dokki",
     "mcp",
     "documents",
+    "tables",
+    "artifacts",
+    "files",
     "memory"
   ],
   "skills": "./skills/",
@@ -21,7 +24,7 @@
   "interface": {
     "displayName": "Dokki MCP",
     "shortDescription": "Connect Codex to Dokki workspace tools.",
-    "longDescription": "Connect Codex directly to Dokki's hosted MCP endpoints for workspace documents, tables, artifacts, publishing, search, and memory. Codex uses Dokki OAuth during installation so you can choose the Personal and Org workspaces this plugin may access.",
+    "longDescription": "Connect Codex directly to Dokki's hosted MCP endpoints for workspace documents, tables, artifacts, file uploads, publishing, search, and memory. Codex uses Dokki OAuth during installation so you can choose the Personal and Org workspaces this plugin may access.",
     "developerName": "Dokki",
     "category": "Productivity",
     "capabilities": [
@@ -34,10 +37,12 @@
     "termsOfServiceURL": "https://dokki.one/terms",
     "defaultPrompt": [
       "List my Dokki workspace resources.",
-      "Search Dokki for notes about this topic.",
-      "Publish this Dokki document.",
-      "Add this fact to Dokki memory."
+      "Create a Dokki table from this data.",
+      "Build a Dokki artifact for this chart."
     ],
-    "brandColor": "#111827"
+    "brandColor": "#111827",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png",
+    "logoDark": "./assets/logo-dark.png"
   }
 }
