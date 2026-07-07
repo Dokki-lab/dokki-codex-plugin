@@ -1,9 +1,16 @@
 {
   "mcpServers": {
     "dokki": {
-      "command": "node",
-      "args": ["./scripts/dokki-mcp-bridge.mjs"],
-      "cwd": "."
+      "type": "http",
+      "url": "https://dokki.one/api/mcp"
+    },
+    "dokki-publish": {
+      "type": "http",
+      "url": "https://dokki.one/api/publish-mcp"
+    },
+    "dokki-memory": {
+      "type": "http",
+      "url": "https://dokki.one/api/mem-mcp"
     }
   }
 }

@@ -1,46 +1,49 @@
 ---
 name: dokki-mcp
-description: Use when connecting Codex to a Dokki workspace through the dokki-mcp plugin, including configuring endpoint URL, connector token, and selecting the documents, publish, or memory MCP flavor.
+description: Use when connecting Codex to Dokki through the dokki-mcp plugin, including OAuth workspace selection and the documents, publish, and memory MCP servers.
 ---
 
 # Dokki MCP
 
-This plugin exposes Dokki's Streamable HTTP MCP endpoints through a local stdio bridge.
+This plugin connects Codex directly to Dokki's hosted Streamable HTTP MCP endpoints.
 
-## Required Environment
+## Authentication
 
-Set one token variable before using the plugin:
+OAuth is the default. During plugin installation, Codex opens Dokki's OAuth flow and
+lets the user choose the Personal and Org workspaces the MCP connection may access.
 
-- `DOKKI_MCP_TOKEN`: preferred. Use a Dokki connector token (`dkc_...`) from workspace settings, or a personal API key (`dk_...`).
-- `DOKKI_API_KEY`: fallback alias for a personal API key.
+Connected OAuth grants are scoped by Dokki's consent screen. If a workspace is missing,
+ask the user to reconnect OAuth and select that Personal/Org workspace, or use an
+Org-scoped Dokki API key in a manually configured MCP server.
 
-Choose the endpoint in one of two ways:
+## MCP Servers
 
-- `DOKKI_MCP_URL`: full MCP endpoint URL, for example `http://localhost:3000/api/mcp`.
-- Or `DOKKI_MCP_ORIGIN` plus `DOKKI_MCP_FLAVOR`.
+The plugin declares three hosted servers:
 
-Defaults:
+- `dokki`: documents, tables, artifacts, resources, search, related entities, files,
+  folders, tags, sharing, and workspace channel tools.
+- `dokki-publish`: publishing and custom-domain tools.
+- `dokki-memory`: Mem0-style durable workspace memory tools.
 
-- `DOKKI_MCP_ORIGIN=https://dokki.one`
-- `DOKKI_MCP_FLAVOR=documents`
-
-Supported flavors:
-
-- `documents`: `/api/mcp`
-- `publish`: `/api/publish-mcp`
-- `memory`: `/api/mem-mcp`
+All servers use `https://dokki.one` and Dokki OAuth discovery.
 
 ## Local Dokki
 
-For local development, override the origin and start Dokki first:
+For local development, configure MCP manually instead of using this marketplace plugin:
 
-```bash
-export DOKKI_MCP_ORIGIN=http://localhost:3000
-npm run dev
+```json
+{
+  "mcpServers": {
+    "dokki-local": {
+      "type": "http",
+      "url": "http://localhost:3000/api/mcp"
+    }
+  }
+}
 ```
-
-Then configure the plugin with a Dokki connector token or personal API key.
 
 ## Notes
 
-Workspace-scoped connector tokens are preferred because Dokki locks tool access to that workspace. The documents flavor exposes workspace resource, document, table, artifact, search, tagging, folder, and sharing tools. The publish flavor exposes site publishing and custom-domain tools. The memory flavor exposes only `memory_*` tools.
+Workspace-scoped connector tokens still work for manual MCP configs, but this plugin is
+OAuth-first so Codex can show authentication during install and preserve Dokki's
+Personal/Org workspace access controls.

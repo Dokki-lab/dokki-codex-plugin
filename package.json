@@ -10,7 +10,7 @@
   },
   "type": "module",
   "scripts": {
-    "check": "node --check plugins/dokki-mcp/scripts/dokki-mcp-bridge.mjs",
+    "check": "node scripts/check-plugin.mjs",
     "start:dokki-mcp": "node plugins/dokki-mcp/scripts/dokki-mcp-bridge.mjs"
   },
   "dependencies": {
