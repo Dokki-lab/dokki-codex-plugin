@@ -83,6 +83,12 @@ for (const skill of [
   assertFile(`plugins/dokki-mcp/skills/${skill}/SKILL.md`);
 }
 
+const fileSkill = fs.readFileSync(
+  path.join(repoRoot, "plugins/dokki-mcp/skills/dokki-file/SKILL.md"),
+  "utf8"
+);
+assert(fileSkill.includes("download_file"), "dokki-file skill must mention download_file");
+
 const servers = mcp.mcpServers ?? {};
 for (const name of ["dokki", "dokki-publish", "dokki-memory"]) {
   const server = servers[name];

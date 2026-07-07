@@ -1,6 +1,6 @@
 ---
 name: dokki-mcp
-description: Use when connecting Codex to Dokki through the dokki-mcp plugin, including OAuth workspace selection and the documents, tables, artifacts, file upload, publish, and memory MCP servers.
+description: Use when connecting Codex to Dokki through the dokki-mcp plugin, including OAuth workspace selection and the documents, tables, artifacts, file upload/download, publish, and memory MCP servers.
 ---
 
 # Dokki MCP
@@ -43,10 +43,12 @@ The main `dokki` MCP server is not document-only. It includes:
   `table_update_cells`.
 - Artifacts: `create_artifact`, `artifact_read`, `artifact_update`,
   `artifact_patch`.
-- Files: `upload_file` creates file resources or inline document image assets.
-  Existing file resources are discoverable through `list_resources`, searchable
-  through `search_workspace` / `grep_workspace`, and manageable through resource
-  tools. There is currently no dedicated `file_read` / `file_update` tool.
+- Files: `upload_file` creates file resources or inline document image assets;
+  `download_file` returns a short-lived signed download URL by default, or inline
+  base64 bytes for small files. Existing file resources are discoverable through
+  `list_resources`, searchable through `search_workspace` / `grep_workspace`,
+  and manageable through resource tools. There is currently no dedicated
+  `file_update` tool.
 - Workspace channel: `list_channel_members`, `read_channel`,
   `send_channel_message`.
 
@@ -55,7 +57,7 @@ Use the narrower skills when the task is clearly about one surface:
 - `dokki-workspace` for browsing, resource management, tags, sharing, and search.
 - `dokki-table` for structured data, rows, columns, and cells.
 - `dokki-artifact` for JSX/HTML artifacts, charts, diagrams, and widgets.
-- `dokki-file` for uploading files or inline images.
+- `dokki-file` for uploading files, downloading files, or creating inline images.
 - `dokki-publish` for published sites and custom domains.
 - `dokki-memory` for durable workspace memory.
 

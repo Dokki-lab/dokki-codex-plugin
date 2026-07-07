@@ -5,7 +5,7 @@ Codex plugin and marketplace metadata for Dokki's hosted MCP servers.
 ## Codex Plugin: Dokki MCP
 
 The `dokki-mcp` plugin exposes Dokki's hosted MCP endpoints to Codex with OAuth.
-It includes workspace browsing, documents, tables, artifacts, file uploads,
+It includes workspace browsing, documents, tables, artifacts, file upload/download,
 publishing, search, and durable memory.
 
 Installed servers:
@@ -20,7 +20,7 @@ Main `dokki` capabilities:
 - Documents: create, read, insert, replace, delete, rewrite
 - Tables: create, read, add/delete rows, add/delete/update columns, update cells
 - Artifacts: create, read, update, patch, preview
-- Files: upload file resources or inline document images
+- Files: upload file resources or inline document images; download file resources
 - Search: semantic search, exact grep, related entities, previews
 
 Focused skills are included for workspace, table, artifact, file, publish, and

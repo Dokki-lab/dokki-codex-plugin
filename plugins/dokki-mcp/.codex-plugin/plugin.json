@@ -1,6 +1,6 @@
 {
   "name": "dokki-mcp",
-  "version": "0.2.0+codex.20260707144802",
+  "version": "0.2.0+codex.20260707150003",
   "description": "Expose Dokki's hosted MCP servers to Codex with OAuth.",
   "author": {
     "name": "Dokki",
@@ -24,7 +24,7 @@
   "interface": {
     "displayName": "Dokki MCP",
     "shortDescription": "Connect Codex to Dokki workspace tools.",
-    "longDescription": "Connect Codex directly to Dokki's hosted MCP endpoints for workspace documents, tables, artifacts, file uploads, publishing, search, and memory. Codex uses Dokki OAuth during installation so you can choose the Personal and Org workspaces this plugin may access.",
+    "longDescription": "Connect Codex directly to Dokki's hosted MCP endpoints for workspace documents, tables, artifacts, file uploads and downloads, publishing, search, and memory. Codex uses Dokki OAuth during installation so you can choose the Personal and Org workspaces this plugin may access.",
     "developerName": "Dokki",
     "category": "Productivity",
     "capabilities": [
