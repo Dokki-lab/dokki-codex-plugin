@@ -22,6 +22,23 @@ const marketplace = readJson(".agents/plugins/marketplace.json");
 
 assert(plugin.name === "dokki-mcp", "plugin name must be dokki-mcp");
 assert(plugin.mcpServers === "./.mcp.json", "plugin must reference ./.mcp.json");
+assert(plugin.homepage === "https://dokki.one", "plugin homepage must use dokki.one");
+assert(
+  plugin.repository === "https://github.com/Dokki-lab/dokki-codex-plugin",
+  "plugin repository must point at dokki-codex-plugin"
+);
+assert(
+  plugin.interface?.websiteURL === "https://dokki.one",
+  "plugin interface websiteURL must use dokki.one"
+);
+assert(
+  plugin.interface?.privacyPolicyURL === "https://dokki.one/privacy",
+  "plugin privacyPolicyURL must use dokki.one/privacy"
+);
+assert(
+  plugin.interface?.termsOfServiceURL === "https://dokki.one/terms",
+  "plugin termsOfServiceURL must use dokki.one/terms"
+);
 
 const servers = mcp.mcpServers ?? {};
 for (const name of ["dokki", "dokki-publish", "dokki-memory"]) {

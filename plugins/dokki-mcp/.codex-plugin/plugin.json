@@ -1,14 +1,14 @@
 {
   "name": "dokki-mcp",
-  "version": "0.2.0+codex.20260707140530",
+  "version": "0.2.0+codex.20260707142127",
   "description": "Expose Dokki's hosted MCP servers to Codex with OAuth.",
   "author": {
     "name": "Dokki",
-    "email": "support@dokki.ai",
-    "url": "https://dokki.ai"
+    "email": "support@dokki.one",
+    "url": "https://dokki.one"
   },
-  "homepage": "https://dokki.ai",
-  "repository": "https://github.com/Dokki-lab/Dokki-SDK",
+  "homepage": "https://dokki.one",
+  "repository": "https://github.com/Dokki-lab/dokki-codex-plugin",
   "license": "MIT",
   "keywords": [
     "dokki",
@@ -29,9 +29,9 @@
       "Read",
       "Write"
     ],
-    "websiteURL": "https://dokki.ai",
-    "privacyPolicyURL": "https://dokki.ai/privacy",
-    "termsOfServiceURL": "https://dokki.ai/terms",
+    "websiteURL": "https://dokki.one",
+    "privacyPolicyURL": "https://dokki.one/privacy",
+    "termsOfServiceURL": "https://dokki.one/terms",
     "defaultPrompt": [
       "List my Dokki workspace resources.",
       "Search Dokki for notes about this topic.",

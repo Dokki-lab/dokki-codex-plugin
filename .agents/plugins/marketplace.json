@@ -1,7 +1,7 @@
 {
-  "name": "dokki-sdk",
+  "name": "dokki-codex-plugin",
   "interface": {
-    "displayName": "Dokki SDK"
+    "displayName": "Dokki"
   },
   "plugins": [
     {

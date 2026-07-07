@@ -1,6 +1,6 @@
-# Dokki SDK
+# Dokki Codex Plugin
 
-SDKs, MCP bridges, and Codex plugins for Dokki.
+Codex plugin and marketplace metadata for Dokki's hosted MCP servers.
 
 ## Codex Plugin: Dokki MCP
 
