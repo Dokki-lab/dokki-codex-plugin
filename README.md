@@ -1,33 +1,40 @@
-# Dokki SDK
+# Dokki Codex Plugin
 
-SDKs, MCP bridges, and Codex plugins for Dokki.
+Codex plugin and marketplace metadata for Dokki's hosted MCP servers.
 
 ## Codex Plugin: Dokki MCP
 
-The `dokki-mcp` plugin exposes Dokki's remote MCP endpoints to Codex through a local stdio bridge.
+The `dokki-mcp` plugin exposes Dokki's hosted MCP endpoints to Codex with OAuth.
 
-Default endpoint:
+Installed servers:
 
-```bash
-https://dokki.one/api/mcp
-```
+- `dokki`: `https://dokki.one/api/mcp`
+- `dokki-publish`: `https://dokki.one/api/publish-mcp`
+- `dokki-memory`: `https://dokki.one/api/mem-mcp`
 
-Configure a Dokki connector token or API key before using the plugin:
+During install, Codex opens Dokki's OAuth flow. Select the Personal and Org workspaces
+this MCP connection may access. Reconnect OAuth if you later need to add or remove
+workspace access.
 
-```bash
-export DOKKI_MCP_TOKEN="dkc_..."
-```
+For local development or API-key based access, configure MCP manually instead of using
+the marketplace plugin:
 
-Switch to the memory MCP flavor:
-
-```bash
-export DOKKI_MCP_FLAVOR=memory
-```
-
-Override the endpoint directly:
-
-```bash
-export DOKKI_MCP_URL="https://dokki.one/api/mem-mcp"
+```json
+{
+  "mcpServers": {
+    "dokki-local": {
+      "type": "http",
+      "url": "http://localhost:3000/api/mcp"
+    },
+    "dokki-api-key": {
+      "type": "http",
+      "url": "https://dokki.one/api/mcp",
+      "headers": {
+        "Authorization": "Bearer dk_..."
+      }
+    }
+  }
+}
 ```
 
 ## Development
@@ -38,7 +45,7 @@ Install dependencies:
 npm install
 ```
 
-Validate the bridge script:
+Validate the plugin metadata:
 
 ```bash
 npm run check
@@ -66,7 +73,7 @@ Marketplace entry:
   },
   "policy": {
     "installation": "AVAILABLE",
-    "authentication": "ON_USE"
+    "authentication": "ON_INSTALL"
   },
   "category": "Productivity"
 }

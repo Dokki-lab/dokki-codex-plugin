@@ -1,14 +1,14 @@
 {
   "name": "dokki-mcp",
-  "version": "0.1.0",
-  "description": "Expose Dokki's built-in MCP servers to Codex through a local stdio bridge.",
+  "version": "0.2.0+codex.20260707142127",
+  "description": "Expose Dokki's hosted MCP servers to Codex with OAuth.",
   "author": {
     "name": "Dokki",
-    "email": "support@dokki.ai",
-    "url": "https://dokki.ai"
+    "email": "support@dokki.one",
+    "url": "https://dokki.one"
   },
-  "homepage": "https://dokki.ai",
-  "repository": "https://github.com/Dokki-lab/Dokki-SDK",
+  "homepage": "https://dokki.one",
+  "repository": "https://github.com/Dokki-lab/dokki-codex-plugin",
   "license": "MIT",
   "keywords": [
     "dokki",
@@ -21,7 +21,7 @@
   "interface": {
     "displayName": "Dokki MCP",
     "shortDescription": "Connect Codex to Dokki workspace tools.",
-    "longDescription": "A local stdio bridge that lets Codex use Dokki's Streamable HTTP MCP endpoints for workspace documents, tables, artifacts, publishing, search, and memory.",
+    "longDescription": "Connect Codex directly to Dokki's hosted MCP endpoints for workspace documents, tables, artifacts, publishing, search, and memory. Codex uses Dokki OAuth during installation so you can choose the Personal and Org workspaces this plugin may access.",
     "developerName": "Dokki",
     "category": "Productivity",
     "capabilities": [
@@ -29,12 +29,13 @@
       "Read",
       "Write"
     ],
-    "websiteURL": "https://dokki.ai",
-    "privacyPolicyURL": "https://dokki.ai/privacy",
-    "termsOfServiceURL": "https://dokki.ai/terms",
+    "websiteURL": "https://dokki.one",
+    "privacyPolicyURL": "https://dokki.one/privacy",
+    "termsOfServiceURL": "https://dokki.one/terms",
     "defaultPrompt": [
       "List my Dokki workspace resources.",
       "Search Dokki for notes about this topic.",
+      "Publish this Dokki document.",
       "Add this fact to Dokki memory."
     ],
     "brandColor": "#111827"
