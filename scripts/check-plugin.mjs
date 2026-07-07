@@ -77,8 +77,6 @@ for (const skill of [
   "dokki-table",
   "dokki-artifact",
   "dokki-file",
-  "dokki-publish",
-  "dokki-memory",
 ]) {
   assertFile(`plugins/dokki-mcp/skills/${skill}/SKILL.md`);
 }
@@ -90,7 +88,7 @@ const fileSkill = fs.readFileSync(
 assert(fileSkill.includes("download_file"), "dokki-file skill must mention download_file");
 
 const servers = mcp.mcpServers ?? {};
-for (const name of ["dokki", "dokki-publish", "dokki-memory"]) {
+for (const name of ["dokki"]) {
   const server = servers[name];
   assert(server, `missing MCP server: ${name}`);
   assert(server.type === "http", `${name} must be an HTTP MCP server`);
@@ -99,6 +97,9 @@ for (const name of ["dokki", "dokki-publish", "dokki-memory"]) {
     `${name} must point at a hosted Dokki MCP endpoint`
   );
   assert(!server.command, `${name} must not use a local stdio command`);
+}
+for (const removedName of ["dokki-publish", "dokki-memory"]) {
+  assert(!servers[removedName], `${removedName} must not be exposed by the Codex plugin`);
 }
 
 const entry = marketplace.plugins?.find((item) => item.name === "dokki-mcp");

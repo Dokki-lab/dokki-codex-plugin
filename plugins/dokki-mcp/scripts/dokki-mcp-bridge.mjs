@@ -12,8 +12,6 @@ import {
 const DEFAULT_ORIGIN = "https://dokki.one";
 const FLAVOR_PATHS = {
   documents: "/api/mcp",
-  publish: "/api/publish-mcp",
-  memory: "/api/mem-mcp",
 };
 
 function getRemoteUrl() {
@@ -27,7 +25,7 @@ function getRemoteUrl() {
 
   if (!path) {
     throw new Error(
-      `Unsupported DOKKI_MCP_FLAVOR "${flavor}". Use "documents", "publish", or "memory".`
+      `Unsupported DOKKI_MCP_FLAVOR "${flavor}". Use "documents".`
     );
   }
 

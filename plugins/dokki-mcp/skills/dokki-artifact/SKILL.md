@@ -45,4 +45,3 @@ For `artifact_patch`, `old_string` must match exactly, including whitespace.
 
 - Read table data first with `dokki-table` when building charts from a table.
 - Move, rename, tag, or share the artifact with `dokki-workspace`.
-- Publish the artifact with `dokki-publish`.
