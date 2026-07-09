@@ -23,7 +23,7 @@
   "skills": "./skills/",
   "mcpServers": "./.mcp.json",
   "interface": {
-    "displayName": "Dokki MCP",
+    "displayName": "Dokki",
     "shortDescription": "Where people and agents create knowledge together \u2014 in Codex.",
     "longDescription": "Dokki is the workspace where AI agents work like teammates \u2014 reading, writing, reviewing, and publishing alongside people through MCP and real-time collaborative documents. This plugin connects Codex to Dokki's hosted MCP facade: 8 high-level tools (instead of ~37 flat ones, so Codex picks the right tool and spends fewer tokens) covering documents, tables, artifacts, file upload/download, semantic + exact search, public-site publishing with custom domains, and a `connect` tool that authorizes and runs 1000+ external integrations (GitHub, Slack, Gmail, Notion, Google Workspace, Linear, \u2026) \u2014 all through Dokki. Codex uses Dokki OAuth during installation so you choose the Personal and Org workspaces this plugin may access.",
     "developerName": "Dokki",

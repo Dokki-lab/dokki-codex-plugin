@@ -111,4 +111,4 @@ assert(
   "marketplace authentication must be ON_INSTALL so Codex starts OAuth during install"
 );
 
-console.log("Dokki MCP Codex plugin metadata is valid.");
+console.log("Dokki Codex plugin metadata is valid.");

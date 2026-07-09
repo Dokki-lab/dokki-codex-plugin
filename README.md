@@ -6,7 +6,7 @@
 
 Codex plugin and marketplace metadata for [Dokki](https://dokki.one)'s hosted MCP servers.
 
-## Codex Plugin: Dokki MCP
+## Codex Plugin: Dokki
 
 The `dokki-mcp` plugin exposes Dokki's hosted MCP to Codex with OAuth. It uses Dokki's
 **facade** surface (`/mcp/v2`): a small set of high-level tools instead of ~37 flat ones, so
