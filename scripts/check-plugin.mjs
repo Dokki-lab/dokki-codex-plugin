@@ -78,7 +78,6 @@ for (const skill of [
   "dokki-artifact",
   "dokki-file",
   "dokki-publish",
-  "dokki-memory",
 ]) {
   assertFile(`plugins/dokki-mcp/skills/${skill}/SKILL.md`);
 }
@@ -90,7 +89,11 @@ const fileSkill = fs.readFileSync(
 assert(/download|action:\s*"file"/i.test(fileSkill), "dokki-file skill must cover reading/downloading a file");
 
 const servers = mcp.mcpServers ?? {};
-for (const name of ["dokki", "dokki-memory"]) {
+assert(
+  JSON.stringify(Object.keys(servers).sort()) === JSON.stringify(["dokki"]),
+  "plugin must declare only the primary Dokki MCP server"
+);
+for (const name of ["dokki"]) {
   const server = servers[name];
   assert(server, `missing MCP server: ${name}`);
   assert(server.type === "http", `${name} must be an HTTP MCP server`);

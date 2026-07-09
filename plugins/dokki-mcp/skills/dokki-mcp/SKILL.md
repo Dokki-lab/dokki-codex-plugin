@@ -1,6 +1,6 @@
 ---
 name: dokki-mcp
-description: Use when connecting Codex to Dokki through the dokki-mcp plugin, including OAuth workspace selection and the documents, tables, artifacts, file upload/download, publish, external integrations, and memory MCP servers.
+description: Use when connecting Codex to Dokki through the dokki-mcp plugin, including OAuth workspace selection and the documents, tables, artifacts, file upload/download, publish, and external integrations MCP server.
 ---
 
 # Dokki MCP
@@ -18,15 +18,14 @@ Org-scoped Dokki API key in a manually configured MCP server.
 
 ## MCP Servers
 
-The plugin declares two hosted servers:
+The plugin declares one hosted server:
 
 - `dokki`: one server covering documents, tables, artifacts, files, search, related
   entities, folders, tags, sharing, workspace channel, publishing, custom domains, and
   external integrations. (The old separate `dokki-publish` server is folded into the
   `publish` facade.)
-- `dokki-memory`: Mem0-style durable workspace memory tools.
 
-Both use `https://dokki.one` and Dokki OAuth discovery.
+It uses `https://dokki.one` and Dokki OAuth discovery.
 
 ## Facades
 
@@ -66,7 +65,6 @@ Use the narrower skills when the task is clearly about one surface:
 - `dokki-artifact` for JSX/HTML artifacts, charts, diagrams, and widgets.
 - `dokki-file` for uploading files, downloading files, or creating inline images.
 - `dokki-publish` for published sites and custom domains.
-- `dokki-memory` for durable workspace memory.
 
 ## Local Dokki
 
