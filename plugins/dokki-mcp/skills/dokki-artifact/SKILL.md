@@ -2,7 +2,7 @@
 name: dokki-artifact
 description: "Create and edit Dokki artifacts: JSX or HTML widgets, charts, diagrams, dashboards, and interactive visual components."
 argument-hint: "<description-or-id> [instruction]"
-allowed-tools: mcp__dokki__create_artifact mcp__dokki__artifact_read mcp__dokki__artifact_update mcp__dokki__artifact_patch mcp__dokki__preview_resource mcp__dokki__search_workspace
+allowed-tools: mcp__dokki__create mcp__dokki__read mcp__dokki__edit mcp__dokki__preview_resource mcp__dokki__find
 ---
 
 # Dokki Artifact
@@ -19,11 +19,9 @@ and Mermaid. Style with Tailwind CSS utilities.
 
 ## Create
 
-Call `create_artifact` with:
+Call `create {action:"artifact", workspace_id, parent_id?, args:{...}}` with:
 
-- `workspace_id`
 - `name`
-- optional `parent_id`
 - `source`
 
 Prefer self-contained source. Inline any data that came from a table or document
@@ -31,15 +29,18 @@ unless the user asks for a specific integration.
 
 ## Edit
 
-Always call `artifact_read` before editing an existing artifact.
+Always call `read {action:"artifact", resource_id}` before editing an existing
+artifact.
 
 Use:
 
-- `artifact_update` for full rewrites or large structural changes.
-- `artifact_patch` for small exact find-and-replace changes.
-- `preview_resource` when an inline rendered preview is useful.
+- `edit {action:"artifact.update", resource_id, args:{source}}` for full rewrites or
+  large structural changes.
+- `edit {action:"artifact.patch", resource_id, args:{old_string, new_string}}` for
+  small exact find-and-replace changes.
+- `preview_resource {resource_id}` when an inline rendered preview is useful.
 
-For `artifact_patch`, `old_string` must match exactly, including whitespace.
+For `artifact.patch`, `old_string` must match exactly, including whitespace.
 
 ## Follow-Ups
 

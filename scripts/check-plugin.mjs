@@ -87,15 +87,15 @@ const fileSkill = fs.readFileSync(
   path.join(repoRoot, "plugins/dokki-mcp/skills/dokki-file/SKILL.md"),
   "utf8"
 );
-assert(fileSkill.includes("download_file"), "dokki-file skill must mention download_file");
+assert(/download|action:\s*"file"/i.test(fileSkill), "dokki-file skill must cover reading/downloading a file");
 
 const servers = mcp.mcpServers ?? {};
-for (const name of ["dokki", "dokki-publish", "dokki-memory"]) {
+for (const name of ["dokki", "dokki-memory"]) {
   const server = servers[name];
   assert(server, `missing MCP server: ${name}`);
   assert(server.type === "http", `${name} must be an HTTP MCP server`);
   assert(
-    typeof server.url === "string" && server.url.startsWith("https://dokki.one/api/"),
+    typeof server.url === "string" && server.url.startsWith("https://dokki.one/"),
     `${name} must point at a hosted Dokki MCP endpoint`
   );
   assert(!server.command, `${name} must not use a local stdio command`);

@@ -4,46 +4,52 @@ Codex plugin and marketplace metadata for Dokki's hosted MCP servers.
 
 ## Codex Plugin: Dokki MCP
 
-The `dokki-mcp` plugin exposes Dokki's hosted MCP endpoints to Codex with OAuth.
-It includes workspace browsing, documents, tables, artifacts, file upload/download,
-publishing, search, and durable memory.
+The `dokki-mcp` plugin exposes Dokki's hosted MCP to Codex with OAuth. It uses Dokki's
+**facade** surface (`/mcp/v2`): a small set of high-level tools instead of ~37 flat ones, so
+Codex picks the right tool reliably and burns fewer tokens.
 
 Installed servers:
 
-- `dokki`: `https://dokki.one/api/mcp`
-- `dokki-publish`: `https://dokki.one/api/publish-mcp`
+- `dokki`: `https://dokki.one/mcp/v2`
 - `dokki-memory`: `https://dokki.one/api/mem-mcp`
 
-Main `dokki` capabilities:
+The `dokki` facade exposes **8 tools** (each takes an `action` + `args`) plus `preview_resource`:
 
-- Workspaces and resources: list, create, move, rename, archive, tag, share
-- Documents: create, read, insert, replace, delete, rewrite
-- Tables: create, read, add/delete rows, add/delete/update columns, update cells
-- Artifacts: create, read, update, patch, preview
-- Files: upload file resources or inline document images; download file resources
-- Search: semantic search, exact grep, related entities, previews
+- `find` — list workspaces/resources, semantic search, exact grep, knowledge-graph (with tag/type/date filters)
+- `read` — read a document (view / outline / edit modes + pagination), table (with where/sort/columns/paging), artifact, or file
+- `create` — workspace, folder, document, table, artifact, or file upload
+- `edit` — rename/move/tag/delete resources (set an emoji **or Lucide icon**), plus document / table / artifact edits (op-arrays, markdown, anchor/section targeting)
+- `share` — share with a user, or set public access
+- `message` — a workspace channel for human confirmations & notifications
+- `publish` — publish/unpublish resources to a public site (`dokki.one/pub/<slug>`) + custom domains
+- `connect` — **connect and use 1000+ external integrations** (GitHub, Slack, Gmail, Notion, Google Sheets/Drive/Calendar, Linear, …) through Dokki: list apps, authorize via OAuth, and run their tools
 
-Focused skills are included for workspace, table, artifact, file, publish, and
-memory workflows so Codex can discover the right tools instead of treating Dokki
-as document-only.
+`dokki-memory` (`/api/mem-mcp`) is a separate server for durable memory.
 
-During install, Codex opens Dokki's OAuth flow. Select the Personal and Org workspaces
-this MCP connection may access. Reconnect OAuth if you later need to add or remove
-workspace access.
+Focused skills are included for the mcp router, workspace, table, artifact, file, publish, and
+memory workflows so Codex discovers the right actions instead of treating Dokki as document-only.
 
-For local development or API-key based access, configure MCP manually instead of using
-the marketplace plugin:
+The facade is **self-teaching**: call a tool with no `action` to list its actions; a partial
+action returns the matching subtree; missing args return a hint with an example. Dangerous
+actions (`edit resource.delete`, `share public`, `publish add`, a `table.edit` column delete)
+return a `confirm_token` you re-send to proceed.
+
+During install, Codex opens Dokki's OAuth flow. Select the Personal and Org workspaces this MCP
+connection may access. Reconnect OAuth if you later need to add or remove workspace access.
+
+For local development or API-key based access, configure MCP manually instead of using the
+marketplace plugin:
 
 ```json
 {
   "mcpServers": {
     "dokki-local": {
       "type": "http",
-      "url": "http://localhost:3000/api/mcp"
+      "url": "http://localhost:3000/mcp/v2"
     },
     "dokki-api-key": {
       "type": "http",
-      "url": "https://dokki.one/api/mcp",
+      "url": "https://dokki.one/mcp/v2",
       "headers": {
         "Authorization": "Bearer dk_..."
       }

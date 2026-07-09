@@ -1,7 +1,7 @@
 {
   "name": "dokki-mcp",
-  "version": "0.2.0+codex.20260707150003",
-  "description": "Expose Dokki's hosted MCP servers to Codex with OAuth.",
+  "version": "0.3.0+codex.20260709000000",
+  "description": "Expose Dokki's hosted MCP (facade surface) to Codex with OAuth \u2014 documents, tables, artifacts, files, search, publishing, memory, and 1000+ external integrations.",
   "author": {
     "name": "Dokki",
     "email": "support@dokki.one",
@@ -17,6 +17,8 @@
     "tables",
     "artifacts",
     "files",
+    "publishing",
+    "integrations",
     "memory"
   ],
   "skills": "./skills/",
@@ -24,7 +26,7 @@
   "interface": {
     "displayName": "Dokki MCP",
     "shortDescription": "Connect Codex to Dokki workspace tools.",
-    "longDescription": "Connect Codex directly to Dokki's hosted MCP endpoints for workspace documents, tables, artifacts, file uploads and downloads, publishing, search, and memory. Codex uses Dokki OAuth during installation so you can choose the Personal and Org workspaces this plugin may access.",
+    "longDescription": "Connect Codex to Dokki's hosted MCP facade (8 high-level tools instead of ~37 flat ones, so Codex picks the right tool and spends fewer tokens): workspace documents, tables, artifacts, file upload/download, semantic + exact search, public-site publishing with custom domains, and a `connect` tool that authorizes and runs 1000+ external integrations (GitHub, Slack, Gmail, Notion, Google Workspace, Linear, \u2026) through Dokki. Codex uses Dokki OAuth during installation so you can choose the Personal and Org workspaces this plugin may access.",
     "developerName": "Dokki",
     "category": "Productivity",
     "capabilities": [
@@ -37,8 +39,8 @@
     "termsOfServiceURL": "https://dokki.one/terms",
     "defaultPrompt": [
       "List my Dokki workspace resources.",
-      "Create a Dokki table from this data.",
-      "Build a Dokki artifact for this chart."
+      "Write a Dokki doc and publish it to our docs site.",
+      "Pull my open GitHub issues into a Dokki table."
     ],
     "brandColor": "#111827",
     "composerIcon": "./assets/icon.png",
