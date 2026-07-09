@@ -1,5 +1,5 @@
 {
-  "name": "dokki-codex-plugin",
+  "name": "dokki",
   "interface": {
     "displayName": "Dokki"
   },

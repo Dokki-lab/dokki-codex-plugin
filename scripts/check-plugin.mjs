@@ -24,6 +24,8 @@ const plugin = readJson("plugins/dokki-mcp/.codex-plugin/plugin.json");
 const mcp = readJson("plugins/dokki-mcp/.mcp.json");
 const marketplace = readJson(".agents/plugins/marketplace.json");
 
+assert(marketplace.name === "dokki", "marketplace name must be dokki");
+assert(marketplace.interface?.displayName === "Dokki", "marketplace displayName must be Dokki");
 assert(plugin.name === "dokki-mcp", "plugin name must be dokki-mcp");
 assert(plugin.mcpServers === "./.mcp.json", "plugin must reference ./.mcp.json");
 assert(plugin.homepage === "https://dokki.one", "plugin homepage must use dokki.one");
