@@ -1,6 +1,10 @@
 # Dokki Codex Plugin
 
-Codex plugin and marketplace metadata for Dokki's hosted MCP servers.
+> **Dokki — agent-native collaboration OS.** Dokki is the workspace where AI agents work like
+> teammates — reading, writing, reviewing, and publishing alongside people through MCP and
+> real-time collaborative documents. This plugin brings that workspace into Codex.
+
+Codex plugin and marketplace metadata for [Dokki](https://dokki.one)'s hosted MCP servers.
 
 ## Codex Plugin: Dokki MCP
 
