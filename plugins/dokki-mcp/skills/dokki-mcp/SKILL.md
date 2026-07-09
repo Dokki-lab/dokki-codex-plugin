@@ -1,6 +1,6 @@
 ---
 name: dokki-mcp
-description: Use when connecting Codex to Dokki through the dokki-mcp plugin, including OAuth workspace selection and the documents, tables, artifacts, file upload/download, publish, and memory MCP servers.
+description: Use when connecting Codex to Dokki through the dokki-mcp plugin, including OAuth workspace selection and the documents, tables, artifacts, file upload/download, publish, external integrations, and memory MCP servers.
 ---
 
 # Dokki MCP
@@ -18,43 +18,50 @@ Org-scoped Dokki API key in a manually configured MCP server.
 
 ## MCP Servers
 
-The plugin declares three hosted servers:
+The plugin declares two hosted servers:
 
-- `dokki`: documents, tables, artifacts, resources, search, related entities, files,
-  folders, tags, sharing, and workspace channel tools.
-- `dokki-publish`: publishing and custom-domain tools.
+- `dokki`: one server covering documents, tables, artifacts, files, search, related
+  entities, folders, tags, sharing, workspace channel, publishing, custom domains, and
+  external integrations. (The old separate `dokki-publish` server is folded into the
+  `publish` facade.)
 - `dokki-memory`: Mem0-style durable workspace memory tools.
 
-All servers use `https://dokki.one` and Dokki OAuth discovery.
+Both use `https://dokki.one` and Dokki OAuth discovery.
 
-## Tool Families
+## Facades
 
-The main `dokki` MCP server is not document-only. It includes:
+The `dokki` server exposes **8 facade tools + `preview_resource`**. A call is
+`<facade>` with `{ action: "<action>", <top-level ids>, args: { <payload> } }`.
+Top-level ids: `workspace_id`, `resource_id`, `parent_id`, `insert_after_id`, `site_id`.
+Everything else goes in `args`.
 
-- Workspace discovery and organization: `list_workspaces`, `list_resources`,
-  `create_workspace`, `create_folder`, `move_resource`, `update_resource`,
-  `delete_resource`, `tag_resource`, `untag_resource`, `share_resource`.
-- Search and inspection: `search_workspace`, `grep_workspace`, `related_entities`,
-  `preview_resource`.
-- Documents: `create_document`, `doc_read`, `doc_insert`, `doc_replace`,
-  `doc_delete`, `doc_rewrite`.
-- Tables: `create_table`, `table_read`, `table_add_rows`, `table_delete_rows`,
-  `table_add_columns`, `table_delete_columns`, `table_update_columns`,
-  `table_update_cells`.
-- Artifacts: `create_artifact`, `artifact_read`, `artifact_update`,
-  `artifact_patch`.
-- Files: `upload_file` creates file resources or inline document image assets;
-  `download_file` returns a short-lived signed download URL by default, or inline
-  base64 bytes for small files. Existing file resources are discoverable through
-  `list_resources`, searchable through `search_workspace` / `grep_workspace`,
-  and manageable through resource tools. There is currently no dedicated
-  `file_update` tool.
-- Workspace channel: `list_channel_members`, `read_channel`,
-  `send_channel_message`.
+- `find` — discovery & search: `workspaces`, `resources`, `search`, `grep`, `related`.
+- `read` — read a resource: `doc`, `table`, `artifact`, `file`.
+- `create` — new resources: `doc`, `table`, `artifact`, `folder`, `workspace`, `file`.
+- `edit` — mutate: `resource.update` / `.move` / `.tag` / `.untag` / `.delete`,
+  `doc.edit` / `doc.rewrite`, `table.edit`, `artifact.update` / `.patch`.
+- `share` — `user` (email), `public`.
+- `message` — workspace channel: `members`, `send`, `read`.
+- `publish` — sites & domains: `site`, `site.create`, `site.update`, `resources`,
+  `add`, `remove`, `domain.set` / `.remove` / `.status`.
+- `connect` — external integrations relay: `apps`, `list`, `authorize`, `disconnect`,
+  `tools`, `call`.
+- `preview_resource` — standalone rendered preview `{ resource_id }`.
+
+### Self-teaching conventions
+
+- Call a facade with **no `action`** → it lists its actions. A **partial action**
+  (e.g. `table.columns`) returns that subtree. Unknown action → `invalid_action` with
+  nearest matches. Name the *action*; let the facade teach the args.
+- Missing/invalid args → a `missing_args` hint with the exact keys and an example.
+- **Dangerous actions** (`edit resource.delete`, `edit table.edit` with a
+  `columns.delete` op, `share public`, `publish add`) return `requires_confirmation`
+  plus a `confirm_token`. Re-call the SAME action + args WITH `confirm_token` to execute.
 
 Use the narrower skills when the task is clearly about one surface:
 
-- `dokki-workspace` for browsing, resource management, tags, sharing, and search.
+- `dokki-workspace` for browsing, resource management, tags, sharing, search, and
+  external integrations (`connect`).
 - `dokki-table` for structured data, rows, columns, and cells.
 - `dokki-artifact` for JSX/HTML artifacts, charts, diagrams, and widgets.
 - `dokki-file` for uploading files, downloading files, or creating inline images.
@@ -70,7 +77,7 @@ For local development, configure MCP manually instead of using this marketplace 
   "mcpServers": {
     "dokki-local": {
       "type": "http",
-      "url": "http://localhost:3000/api/mcp"
+      "url": "http://localhost:3000/mcp/v2"
     }
   }
 }

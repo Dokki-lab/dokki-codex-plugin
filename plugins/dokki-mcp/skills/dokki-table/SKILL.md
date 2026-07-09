@@ -2,7 +2,7 @@
 name: dokki-table
 description: "Create and edit Dokki tables with typed columns, rows, and cell updates. Use for structured data, trackers, lists, inventories, CRM-style tables, and table-backed datasets."
 argument-hint: "<action> [table-name-or-id] [details]"
-allowed-tools: mcp__dokki__create_table mcp__dokki__table_read mcp__dokki__table_add_rows mcp__dokki__table_delete_rows mcp__dokki__table_add_columns mcp__dokki__table_delete_columns mcp__dokki__table_update_columns mcp__dokki__table_update_cells mcp__dokki__list_resources mcp__dokki__search_workspace
+allowed-tools: mcp__dokki__create mcp__dokki__read mcp__dokki__edit mcp__dokki__find
 ---
 
 # Dokki Table
@@ -17,11 +17,9 @@ presentation of data.
 
 ## Create
 
-Call `create_table` with:
+Call `create {action:"table", workspace_id, parent_id?, args:{...}}` with:
 
-- `workspace_id`
 - `name`
-- optional `parent_id`
 - optional `description`
 - optional `columns`: `{ headerName, type }`
 - optional `rows`: values keyed by column header name on initial create only
@@ -31,19 +29,23 @@ Column types: `text`, `number`, `boolean`, `date`, `select`, `multiSelect`,
 
 ## Edit
 
-Always call `table_read` before editing. The compact format returns row IDs and
-column IDs, including short IDs that can be used in update calls.
+Always call `read {action:"table", resource_id}` before editing (default 20 rows;
+pass `args.where` / `columns` / `sort` / `page` to scope). The compact format returns
+row IDs and column IDs, including short IDs usable in update calls.
 
-Use:
+Prefer the batched op form:
+`edit {action:"table.edit", resource_id, args:{ops:[...]}}` where each op is one of:
 
-- `table_add_rows` for new rows.
-- `table_delete_rows` for removing rows.
-- `table_add_columns` for new fields.
-- `table_delete_columns` for removing fields and their values.
-- `table_update_columns` for renaming or changing column metadata.
-- `table_update_cells` for changing values in existing rows.
+- `{op:"rows.add", rows}` for new rows.
+- `{op:"rows.delete", rowIds}` for removing rows.
+- `{op:"columns.add", columns}` for new fields.
+- `{op:"columns.delete", columnIds}` for removing fields and their values — confirm.
+- `{op:"columns.update", columns}` for renaming or changing column metadata.
+- `{op:"cells.update", updates}` for changing values in existing rows.
 
-Batch related cell changes into one `table_update_cells` call.
+`columnId` accepts a header name or an id. Batch related changes into one
+`table.edit` call. A `columns.delete` op returns a `confirm_token` to re-send.
+(Singular actions `table.rows.add`, `table.cells.update`, etc. still exist.)
 
 ## Follow-Ups
 

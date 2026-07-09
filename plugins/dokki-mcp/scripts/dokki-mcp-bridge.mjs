@@ -11,7 +11,7 @@ import {
 
 const DEFAULT_ORIGIN = "https://dokki.one";
 const FLAVOR_PATHS = {
-  documents: "/api/mcp",
+  documents: "/mcp/v2",
   publish: "/api/publish-mcp",
   memory: "/api/mem-mcp",
 };
