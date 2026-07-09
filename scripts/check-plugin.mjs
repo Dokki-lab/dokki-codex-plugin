@@ -24,6 +24,8 @@ const plugin = readJson("plugins/dokki-mcp/.codex-plugin/plugin.json");
 const mcp = readJson("plugins/dokki-mcp/.mcp.json");
 const marketplace = readJson(".agents/plugins/marketplace.json");
 
+assert(marketplace.name === "dokki", "marketplace name must be dokki");
+assert(marketplace.interface?.displayName === "Dokki", "marketplace displayName must be Dokki");
 assert(plugin.name === "dokki-mcp", "plugin name must be dokki-mcp");
 assert(plugin.mcpServers === "./.mcp.json", "plugin must reference ./.mcp.json");
 assert(plugin.homepage === "https://dokki.one", "plugin homepage must use dokki.one");
@@ -78,7 +80,6 @@ for (const skill of [
   "dokki-artifact",
   "dokki-file",
   "dokki-publish",
-  "dokki-memory",
 ]) {
   assertFile(`plugins/dokki-mcp/skills/${skill}/SKILL.md`);
 }
@@ -90,7 +91,11 @@ const fileSkill = fs.readFileSync(
 assert(/download|action:\s*"file"/i.test(fileSkill), "dokki-file skill must cover reading/downloading a file");
 
 const servers = mcp.mcpServers ?? {};
-for (const name of ["dokki", "dokki-memory"]) {
+assert(
+  JSON.stringify(Object.keys(servers).sort()) === JSON.stringify(["dokki"]),
+  "plugin must declare only the primary Dokki MCP server"
+);
+for (const name of ["dokki"]) {
   const server = servers[name];
   assert(server, `missing MCP server: ${name}`);
   assert(server.type === "http", `${name} must be an HTTP MCP server`);
@@ -108,4 +113,4 @@ assert(
   "marketplace authentication must be ON_INSTALL so Codex starts OAuth during install"
 );
 
-console.log("Dokki MCP Codex plugin metadata is valid.");
+console.log("Dokki Codex plugin metadata is valid.");

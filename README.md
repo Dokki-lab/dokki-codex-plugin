@@ -6,16 +6,15 @@
 
 Codex plugin and marketplace metadata for [Dokki](https://dokki.one)'s hosted MCP servers.
 
-## Codex Plugin: Dokki MCP
+## Codex Plugin: Dokki
 
 The `dokki-mcp` plugin exposes Dokki's hosted MCP to Codex with OAuth. It uses Dokki's
 **facade** surface (`/mcp/v2`): a small set of high-level tools instead of ~37 flat ones, so
 Codex picks the right tool reliably and burns fewer tokens.
 
-Installed servers:
+Installed server:
 
 - `dokki`: `https://dokki.one/mcp/v2`
-- `dokki-memory`: `https://dokki.one/api/mem-mcp`
 
 The `dokki` facade exposes **8 tools** (each takes an `action` + `args`) plus `preview_resource`:
 
@@ -28,10 +27,8 @@ The `dokki` facade exposes **8 tools** (each takes an `action` + `args`) plus `p
 - `publish` — publish/unpublish resources to a public site (`dokki.one/pub/<slug>`) + custom domains
 - `connect` — **connect and use 1000+ external integrations** (GitHub, Slack, Gmail, Notion, Google Sheets/Drive/Calendar, Linear, …) through Dokki: list apps, authorize via OAuth, and run their tools
 
-`dokki-memory` (`/api/mem-mcp`) is a separate server for durable memory.
-
-Focused skills are included for the mcp router, workspace, table, artifact, file, publish, and
-memory workflows so Codex discovers the right actions instead of treating Dokki as document-only.
+Focused skills are included for the mcp router, workspace, table, artifact, file, and publish
+workflows so Codex discovers the right actions instead of treating Dokki as document-only.
 
 The facade is **self-teaching**: call a tool with no `action` to list its actions; a partial
 action returns the matching subtree; missing args return a hint with an example. Dangerous
