@@ -2,7 +2,7 @@
 name: dokki-workspace
 description: "Browse Dokki workspaces, list resource trees, search content, preview resources, and organize files, folders, documents, tables, and artifacts."
 argument-hint: "[action] [resource-name-or-id]"
-allowed-tools: mcp__dokki__find mcp__dokki__read mcp__dokki__create mcp__dokki__edit mcp__dokki__share mcp__dokki__connect mcp__dokki__preview_resource
+allowed-tools: mcp__dokki__find mcp__dokki__read mcp__dokki__create mcp__dokki__edit mcp__dokki__share mcp__dokki__message mcp__dokki__connect mcp__dokki__preview_resource
 ---
 
 # Dokki Workspace
@@ -54,15 +54,29 @@ Use:
 Confirm before public sharing, email sharing, broad moves, or archive/delete
 operations. Dangerous actions return a `confirm_token` to re-send.
 
+## Coordinate (workspace channel)
+
+Use the workspace channel to ask a human to confirm something or to notify the team —
+useful before a destructive or externally-visible action:
+
+- `message {action:"members", workspace_id}` — list channel members (to address a person).
+- `message {action:"send", workspace_id, args:{content, require_response?}}` — post a
+  message; set `require_response:true` when you need an approval or answer.
+- `message {action:"read", workspace_id, args:{limit?}}` — read recent replies before proceeding.
+
+Wait for an explicit reply before continuing on anything destructive or visible.
+
 ## Connect external integrations
 
 Dokki's MCP is also a gateway to 1000+ external integrations (GitHub, Slack, Gmail,
 Notion, Google Sheets/Drive/Calendar, Linear, …), scoped to the user's own connected
 accounts:
 
-- `connect {action:"apps", args:{query?}}` — list/search available integrations.
+- `connect {action:"apps", args:{query?}}` — list/search available integrations; each
+  result's `slug` is what you pass as `toolkit`.
 - `connect {action:"list"}` — connected accounts + status.
 - `connect {action:"authorize", args:{toolkit:"github"}}` — returns an OAuth
   `authorize_url`; poll `connect list` until active.
+- `connect {action:"disconnect", args:{connection_id}}` — remove a connected account.
 - `connect {action:"tools", args:{toolkit?}}` — list callable tools.
 - `connect {action:"call", args:{tool, args}}` — run one of those tools.
