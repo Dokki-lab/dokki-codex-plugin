@@ -42,9 +42,12 @@ Use:
 - `create {action:"workspace", args:{name, org_id?}}`
 - `create {action:"folder", workspace_id, parent_id?, args:{name}}`
 - `edit {action:"resource.move", resource_id, insert_after_id?, args:{new_parent_path?}}`
-- `edit {action:"resource.update", resource_id, args:{name?, icon?}}` — `icon` is an
+- `edit {action:"resource.update", resource_id, args:{name?, icon?, metadata?}}` — `icon` is an
   emoji OR a Lucide icon `lucide:<kebab-name>` (e.g. `lucide:rocket`), on ANY resource
-  type.
+  type. `metadata` is a structured JSON object stored on the resource (e.g.
+  `{kind:"api_endpoint", http_method:"GET", path:"/api/v1/credits"}`); it REPLACES the
+  metadata object wholesale ({} clears it). Also settable at creation:
+  `create {action:"doc", …, args:{metadata}}`.
 - `edit {action:"resource.delete", resource_id}` — confirm.
 - `edit {action:"resource.tag", resource_id, args:{tag_names}}`
 - `edit {action:"resource.untag", resource_id, args:{tag_names}}`
