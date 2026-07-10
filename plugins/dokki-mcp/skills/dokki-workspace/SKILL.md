@@ -46,8 +46,8 @@ Use:
   emoji OR a Lucide icon `lucide:<kebab-name>` (e.g. `lucide:rocket`), on ANY resource
   type. `metadata` is a structured JSON object stored on the resource (e.g.
   `{kind:"api_endpoint", http_method:"GET", path:"/api/v1/credits"}`); it REPLACES the
-  metadata object wholesale ({} clears it). Also settable at creation:
-  `create {action:"doc", …, args:{metadata}}`.
+  metadata object wholesale ({} clears it). Metadata is a property of the resource, so
+  every `create` action accepts it too — `create {action:"doc"|"table"|"artifact"|"folder"|"file", …, args:{metadata}}`.
 - `edit {action:"resource.delete", resource_id}` — confirm.
 - `edit {action:"resource.tag", resource_id, args:{tag_names}}`
 - `edit {action:"resource.untag", resource_id, args:{tag_names}}`
