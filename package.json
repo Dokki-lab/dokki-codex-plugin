@@ -1,8 +1,8 @@
 {
   "name": "@dokki-lab/dokki-codex-plugin",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
-  "description": "Codex plugin for Dokki hosted MCP servers.",
+  "description": "Codex plugin for the Dokki hosted MCP server.",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -10,10 +10,6 @@
   },
   "type": "module",
   "scripts": {
-    "check": "node scripts/check-plugin.mjs",
-    "start:dokki-mcp": "node plugins/dokki-mcp/scripts/dokki-mcp-bridge.mjs"
-  },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.27.1"
+    "check": "node scripts/check-plugin.mjs"
   }
 }
