@@ -75,7 +75,9 @@ for (const asset of [
 }
 
 for (const skill of [
+  "dokki-mcp",
   "dokki-workspace",
+  "dokki-document",
   "dokki-table",
   "dokki-artifact",
   "dokki-file",
@@ -83,6 +85,35 @@ for (const skill of [
 ]) {
   assertFile(`plugins/dokki-mcp/skills/${skill}/SKILL.md`);
 }
+
+// The router skill is what Codex reads first; a narrower skill that it never
+// names is effectively invisible, so keep the two in lockstep.
+const routerSkill = fs.readFileSync(
+  path.join(repoRoot, "plugins/dokki-mcp/skills/dokki-mcp/SKILL.md"),
+  "utf8"
+);
+for (const skill of [
+  "dokki-workspace",
+  "dokki-document",
+  "dokki-table",
+  "dokki-artifact",
+  "dokki-file",
+  "dokki-publish",
+]) {
+  assert(
+    routerSkill.includes(`\`${skill}\``),
+    `dokki-mcp router skill must route to ${skill}`
+  );
+}
+
+const documentSkill = fs.readFileSync(
+  path.join(repoRoot, "plugins/dokki-mcp/skills/dokki-document/SKILL.md"),
+  "utf8"
+);
+assert(
+  /doc\.edit/.test(documentSkill) && /doc\.rewrite/.test(documentSkill),
+  "dokki-document skill must cover doc.edit and doc.rewrite"
+);
 
 const fileSkill = fs.readFileSync(
   path.join(repoRoot, "plugins/dokki-mcp/skills/dokki-file/SKILL.md"),

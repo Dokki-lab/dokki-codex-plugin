@@ -27,8 +27,8 @@ The `dokki` facade exposes **8 tools** (each takes an `action` + `args`) plus `p
 - `publish` — publish/unpublish resources to a public site (`dokki.one/pub/<slug>`) + custom domains
 - `connect` — **connect and use 1000+ external integrations** (GitHub, Slack, Gmail, Notion, Google Sheets/Drive/Calendar, Linear, …) through Dokki: list apps, authorize via OAuth, and run their tools
 
-Focused skills are included for the mcp router, workspace, table, artifact, file, and publish
-workflows so Codex discovers the right actions instead of treating Dokki as document-only.
+Focused skills are included for the mcp router, workspace, document, table, artifact, file, and
+publish workflows so Codex discovers the right actions for each surface.
 
 The facade is **self-teaching**: call a tool with no `action` to list its actions; a partial
 action returns the matching subtree; missing args return a hint with an example. Dangerous

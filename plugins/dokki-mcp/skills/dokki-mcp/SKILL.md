@@ -61,6 +61,8 @@ Use the narrower skills when the task is clearly about one surface:
 
 - `dokki-workspace` for browsing, resource management, tags, sharing, search, and
   external integrations (`connect`).
+- `dokki-document` for writing and editing rich-text documents (`create doc`,
+  `read doc` modes, `doc.edit` op-arrays, `doc.rewrite`).
 - `dokki-table` for structured data, rows, columns, and cells.
 - `dokki-artifact` for JSX/HTML artifacts, charts, diagrams, and widgets.
 - `dokki-file` for uploading files, downloading files, or creating inline images.
