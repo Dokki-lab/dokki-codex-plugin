@@ -41,7 +41,7 @@
       "Write a Dokki doc and publish it to our docs site.",
       "Pull my open GitHub issues into a Dokki table."
     ],
-    "brandColor": "#050706",
+    "brandColor": "#191919",
     "composerIcon": "./assets/icon.png",
     "logo": "./assets/logo.png",
     "logoDark": "./assets/logo-dark.png"
