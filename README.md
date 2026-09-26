@@ -1,63 +1,63 @@
-# Dokki Codex Plugin
+<p>
+  <a href="https://dokki.one">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Dokki-lab/.github/main/assets/dokki-dark.svg">
+      <img src="https://raw.githubusercontent.com/Dokki-lab/.github/main/assets/dokki-light.svg" alt="Dokki" width="180">
+    </picture>
+  </a>
+</p>
 
-> **Dokki — agent-native collaboration OS.** Dokki is the workspace where AI agents work like
-> teammates — reading, writing, reviewing, and publishing alongside people through MCP and
-> real-time collaborative documents. This plugin brings that workspace into Codex.
+# Dokki for Codex
 
-Codex plugin and marketplace metadata for [Dokki](https://dokki.one)'s hosted MCP servers.
+Connect Codex to your Dokki workspace. Search shared knowledge, create documents, work with tables and artifacts, and publish results through MCP.
 
-## Codex Plugin: Dokki
+[Connect](#connect-to-dokki) · [Documentation](https://dokki.one/pub/docs) · [Contribute](#development)
 
-The `dokki-mcp` plugin exposes Dokki's hosted MCP to Codex with OAuth. It uses Dokki's
-**facade** surface (`/mcp/v2`): a small set of high-level tools instead of ~37 flat ones, so
-Codex picks the right tool reliably and burns fewer tokens.
+## Connect to Dokki
 
-Installed server:
+You need Codex with MCP support and a [Dokki account](https://dokki.one). Choose the Personal and Org workspaces the connection may access during Dokki's OAuth sign-in.
 
-- `dokki`: `https://dokki.one/mcp/v2`
+**Plugin users:** this repository contains the `dokki` marketplace and `dokki-mcp` plugin, including focused skills. Use the repository source `Dokki-lab/dokki-codex-plugin` in a Codex client that supports repository marketplaces. See [marketplace layout](#codex-marketplace-import) below.
 
-The `dokki` facade exposes **8 tools** (each takes an `action` + `args`) plus `preview_resource`:
+**MCP-only CLI setup:** to connect the hosted tools directly, run:
 
-- `find` — list workspaces/resources, semantic search, exact grep, knowledge-graph (with tag/type/date filters)
-- `read` — read a document (view / outline / edit modes + pagination), table (with where/sort/columns/paging), artifact, or file
-- `create` — workspace, folder, document, table, artifact, or file upload
-- `edit` — rename/move/tag/delete resources (set an emoji **or Lucide icon**), plus document / table / artifact edits (op-arrays, markdown, anchor/section targeting)
-- `share` — share with a user, or set public access
-- `message` — a workspace channel for human confirmations & notifications
-- `publish` — publish/unpublish resources to a public site (`dokki.one/pub/<slug>`) + custom domains
-- `connect` — **connect and use 1000+ external integrations** (GitHub, Slack, Gmail, Notion, Google Sheets/Drive/Calendar, Linear, …) through Dokki: list apps, authorize via OAuth, and run their tools
-
-Focused skills are included for the mcp router, workspace, document, table, artifact, file, and
-publish workflows so Codex discovers the right actions for each surface.
-
-The facade is **self-teaching**: call a tool with no `action` to list its actions; a partial
-action returns the matching subtree; missing args return a hint with an example. Dangerous
-actions (`edit resource.delete`, `share public`, `publish add`, a `table.edit` column delete)
-return a `confirm_token` you re-send to proceed.
-
-During install, Codex opens Dokki's OAuth flow. Select the Personal and Org workspaces this MCP
-connection may access. Reconnect OAuth if you later need to add or remove workspace access.
-
-For local development or API-key based access, configure MCP manually instead of using the
-marketplace plugin:
-
-```json
-{
-  "mcpServers": {
-    "dokki-local": {
-      "type": "http",
-      "url": "http://localhost:3000/mcp/v2"
-    },
-    "dokki-api-key": {
-      "type": "http",
-      "url": "https://dokki.one/mcp/v2",
-      "headers": {
-        "Authorization": "Bearer dk_..."
-      }
-    }
-  }
-}
+```sh
+codex mcp add dokki --url https://dokki.one/mcp/v2
+codex mcp login dokki
 ```
+
+This direct connection does not install the plugin's bundled skills. If you already installed the plugin, use its connection rather than adding a duplicate.
+
+## Your first result
+
+Ask Codex:
+
+> List the Dokki workspaces I can access, then show the resources in the workspace I choose.
+
+You should see the workspaces allowed by your sign-in scope. Once that works, try:
+
+> Create a document called “Launch brief” in my chosen workspace with sections for audience, message and next steps. Return the document link.
+
+Open the returned link in Dokki to review and edit the result. Publishing is a separate action; creating a document does not make it public.
+
+## What is included
+
+| Workflow | Tools |
+| --- | --- |
+| Discover and read knowledge | `find`, `read` |
+| Create and edit shared work | `create`, `edit` |
+| Collaborate and share | `message`, `share` |
+| Publish and connect apps | `publish`, `connect` |
+| Work with agents and skills | `agent`, `skills` |
+| Preview a result | `preview_resource` |
+
+The hosted server at `https://dokki.one/mcp/v2` describes its current actions. Call a tool without an `action` to discover its interface. The plugin bundles routing, workspace, document, table, artifact, file and publishing skills.
+
+## Troubleshooting
+
+- **Missing workspace:** check the scope selected during OAuth. Reconnect only when you intend to change that access.
+- **MCP-only connection but no skills:** install the plugin for its bundled workflows; MCP tools and skills are separate.
+- **Account or usage question:** see [plans](https://dokki.one/plans) or [support](https://github.com/Dokki-lab/.github/blob/main/SUPPORT.md). The plugin is open source; hosted usage follows your Dokki plan.
 
 ## Development
 
@@ -100,3 +100,13 @@ Marketplace entry:
   "category": "Productivity"
 }
 ```
+
+## Contributing and support
+
+Bug reports, examples and focused improvements are welcome. Read the [contribution guide](https://github.com/Dokki-lab/.github/blob/main/CONTRIBUTING.md), use this repository's Issues for reproducible problems, and follow [private security reporting](https://github.com/Dokki-lab/.github/blob/main/SECURITY.md) for vulnerabilities.
+
+[Dokki](https://dokki.one) · [Documentation](https://dokki.one/pub/docs) · [All projects](https://github.com/Dokki-lab) · [Support](https://github.com/Dokki-lab/.github/blob/main/SUPPORT.md)
+
+## License
+
+The plugin and package manifests declare MIT. This repository does not yet include a standalone LICENSE file; maintainers should add the intended license text and copyright details.
