@@ -9,6 +9,8 @@
 
 # Dokki for Codex
 
+**You lead. Agents do the work.** [Dokki](https://dokki.one) brings your team, agents and work into one workspace—from the first goal to shared, editable results.
+
 Connect Codex to your Dokki workspace. Search shared knowledge, create documents, work with tables and artifacts, and publish results through MCP.
 
 [Connect](#connect-to-dokki) · [Documentation](https://dokki.one/pub/docs) · [Contribute](#development)
