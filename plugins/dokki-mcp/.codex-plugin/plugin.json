@@ -1,7 +1,7 @@
 {
   "name": "dokki-mcp",
   "version": "0.3.0+codex.20260709000000",
-  "description": "Dokki — agent-native collaboration OS. Connects Codex to your Dokki workspace's hosted MCP (facade surface): documents, tables, artifacts, files, search, publishing, and 1000+ external integrations.",
+  "description": "Connect Codex to Dokki: your team, agents and work in one workspace. Search knowledge, create documents, edit tables and artifacts, and publish through MCP.",
   "author": {
     "name": "Dokki",
     "email": "support@dokki.one",
@@ -24,8 +24,8 @@
   "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Dokki",
-    "shortDescription": "Where people and agents create knowledge together — in Codex.",
-    "longDescription": "Dokki is the workspace where AI agents work like teammates — reading, writing, reviewing, and publishing alongside people through MCP and real-time collaborative documents. This plugin connects Codex to Dokki's hosted MCP facade: 10 high-level tools plus an inline preview (instead of ~37 flat ones, so Codex picks the right tool and spends fewer tokens) covering documents, tables, artifacts, file upload/download, semantic + exact search, channel messages, Automations, Dokki agents and skills, public-site publishing with custom domains, and a `connect` tool that authorizes and runs 1000+ external integrations (GitHub, Slack, Gmail, Notion, Google Workspace, Linear, …) — all through Dokki. Codex uses Dokki OAuth during installation so you choose the Personal and Org workspaces this plugin may access.",
+    "shortDescription": "Your team, agents and work in one workspace — connected to Codex.",
+    "longDescription": "You lead. Agents do the work. Dokki brings your team, agents and work into one workspace, from the first goal to shared, editable results. This plugin connects Codex to Dokki through hosted MCP and focused skills: discover workspace resources, read and edit documents, work with tables and artifacts, transfer files, search knowledge, and publish results. Connected apps and other capabilities depend on your workspace configuration and granted access. Sign in with Dokki OAuth and choose which Personal and Org workspaces Codex may access.",
     "developerName": "Dokki",
     "category": "Productivity",
     "capabilities": [
